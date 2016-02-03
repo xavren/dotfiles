@@ -1,0 +1,8 @@
+#!/bin/bash
+
+git status --porcelain | awk '{print $2}' | \
+while read file; do
+	echo "$file"
+	php-cs-fixer fix --level=psr2 "$file"
+	phpcs --standard=PSR2 "$file"
+done
